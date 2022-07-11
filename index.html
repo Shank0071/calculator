@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  
+  <title>Frontend Mentor | Calculator app</title>
+
+  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+  <style>
+    .attribution { 
+      font-size: 11px; 
+      text-align: center; 
+    }
+
+    .attribution a { 
+      color: hsl(228, 45%, 44%); 
+    }
+
+    body {
+      background-color: hsl(225, 21%, 49%);
+      font-family: Arial, Helvetica, sans-serif;
+      font-weight: 700;
+    }
+
+    main {
+      background-color: gray;
+      padding: 5px;
+      min-width: 280px;
+      max-width: 30%;
+      margin: 10vh auto;
+    }
+
+    .ans {
+      display:flex;
+      justify-content: end;
+      align-items: center;
+      background-color: hsl(222, 26%, 31%);
+      padding: 32px;
+      border-radius: 5px;
+      color: white;
+      height: 2rem
+    }
+
+    .nums {
+      background-color: hsl(222, 26%, 31%);
+      margin-top: 2rem;
+      border-radius: 5px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 5px;
+      padding: 10px;
+    }
+
+    .nums1 {
+      background-color: antiquewhite;
+      padding: 10px;
+      border-radius: 5px;
+      text-align: center;
+    }
+
+    .nums1:hover {
+      cursor: pointer;
+      transform: scale(1.01);
+    }
+
+    .reset {
+      grid-column: 1/3;
+    }
+
+    .equalto {
+      grid-column: 3/5;
+    }
+
+
+
+  </style>
+</head>
+<body>
+  <main>
+    <div class="ans" id="ans">
+    </div>
+    <div class="nums">
+      <div class="nums1">1</div>
+      <div class="nums1">2</div>
+      <div class="nums1">3</div>
+      <div class="nums1">DEL</div>
+      <div class="nums1">4</div>
+      <div class="nums1">5</div>
+      <div class="nums1">6</div>
+      <div class="nums1">+</div>
+      <div class="nums1">7</div>
+      <div class="nums1">8</div>
+      <div class="nums1">9</div>
+      <div class="nums1">-</div>
+      <div class="nums1">.</div>
+      <div class="nums1">0</div>
+      <div class="nums1">/</div>
+      <div class="nums1">*</div>
+      <div class="nums1 reset">RESET</div>
+      <div class="nums1 equalto">=</div>
+    </div>
+  </main>
+
+
+  <footer>
+    <div class="attribution">
+      Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
+      Coded by <a href="#">Your Name Here</a>.
+    </div>
+  </footer>
+
+  <script>
+    function display(value) {
+      document.getElementsByClassName("ans")[0].innerHTML += value; 
+    }
+
+    function calculate() {
+      try {
+        document.getElementsByClassName("ans")[0].innerHTML = eval(document.getElementsByClassName("ans")[0].innerHTML);
+      } catch(error) {document.getElementsByClassName("ans")[0].innerHTML = error}
+    }
+
+    function clrscr() {
+      document.getElementsByClassName("ans")[0].innerHTML = "";
+    }
+
+    function delLastEl() {
+      document.getElementsByClassName("ans")[0].innerHTML = document.getElementsByClassName("ans")[0].innerHTML.slice(0,-1)
+    }
+
+    for(let i = 0; i < document.getElementsByClassName("nums1").length; i++) {
+      expression = document.getElementsByClassName("nums1");
+      if (expression[i].innerHTML !== "=" && expression[i].innerHTML !== "DEL" &&
+          expression[i].innerHTML !== "RESET"){
+        expression[i].addEventListener("click", function() {
+            display(this.innerHTML)
+        })  
+      }
+      else if (expression[i].innerHTML === "=") {
+        expression[i].addEventListener("click", calculate)
+      }
+      else if (expression[i].innerHTML === "RESET") {
+        expression[i].addEventListener("click", clrscr)
+      }
+
+      else if (expression[i].innerHTML === "DEL") {
+        expression[i].addEventListener("click", delLastEl)
+      }
+
+      
+
+  }
+
+  document.getElementsByClassName("equalto").addEventListener("click", calculate)
+
+
+
+   
+  </script>
+</body>
+</html>
